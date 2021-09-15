@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = "https://github.com/burakakca/omniauth-mastodon"
   spec.licenses      = %w(MIT)
   spec.files         = %w(omniauth-mastodon.gemspec) + Dir['lib/**/*.rb'] + Dir['lib/**/*.yml']
-  spec.name          = "omniauth-mastodon"
+  spec.name          = "omniauth-mastodon-st"
   spec.require_paths = %w(lib)
   spec.version       = OmniAuth::Mastodon::Version
 
