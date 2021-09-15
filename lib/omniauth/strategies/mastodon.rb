@@ -36,7 +36,7 @@ module OmniAuth
       # If the identifier param is not already present, a form will be shown for entering it
       def request_phase
         puts "++++++++++request_phase"
-        puts identifier
+        puts identifier ? "true" : "false"
         puts options[:domain]
         puts options[:client_id]
         puts options[:client_secret]
@@ -90,6 +90,10 @@ module OmniAuth
       end
 
       def start_oauth
+        puts "++++++++++start_oauth"
+        puts callback_url
+        puts authorize_params
+        puts "++++++++++start_oauth"
         set_options_from_identifier
         redirect client.auth_code.authorize_url({:redirect_uri => callback_url}.merge(authorize_params))
       end
