@@ -35,15 +35,19 @@ module OmniAuth
       # Before we can redirect the user to authorize access, we must know where the user is from
       # If the identifier param is not already present, a form will be shown for entering it
       def request_phase
-        identifier ? start_oauth : get_identifier
         puts "++++++++++request_phase"
         puts identifier
+        puts options[:domain]
+        puts options[:client_id]
+        puts options[:client_secret]
+        puts "++++++++++request_phase"
+        identifier ? start_oauth : get_identifier
       end
 
       def callback_phase
-        set_options_from_identifier
         puts "++++++++++callback_phase"
         puts identifier
+        set_options_from_identifier
         super
       end
 
