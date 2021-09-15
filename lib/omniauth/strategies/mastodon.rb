@@ -36,10 +36,14 @@ module OmniAuth
       # If the identifier param is not already present, a form will be shown for entering it
       def request_phase
         identifier ? start_oauth : get_identifier
+        puts "++++++++++request_phase"
+        puts identifier
       end
 
       def callback_phase
         set_options_from_identifier
+        puts "++++++++++callback_phase"
+        puts identifier
         super
       end
 
@@ -49,6 +53,9 @@ module OmniAuth
 
       def callback_url
         full_host + script_name + callback_path
+        puts "++++++++++callback_url"
+        puts identifier
+        puts full_host + script_name + callback_path
       end
 
       def authorize_params
@@ -94,7 +101,12 @@ module OmniAuth
       def set_options_from_identifier
         username, domain         = identifier.split('@')
         client_id, client_secret = options.credentials.call(domain, callback_url)
-
+        puts "*-**-*"
+        puts username
+        puts domain
+        puts client_id
+        puts client_secret
+        puts "*-**-*"
         options.identifier            = identifier
         options.client_options[:site] = "https://#{domain}"
         options.client_id             = client_id
