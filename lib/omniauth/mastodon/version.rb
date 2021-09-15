@@ -12,7 +12,7 @@ module OmniAuth
       end
 
       def patch
-        3
+        4
       end
 
       def pre
