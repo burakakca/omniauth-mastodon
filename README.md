@@ -10,30 +10,22 @@ we already have client credentials for that Mastodon instance.
 
 ## Installation
 
-    gem 'mastodon-api', require: 'mastodon'
-    gem 'omniauth-mastodon'
-    gem 'omniauth'
+    gem 'omniauth-mastodon-st'
 
 ## Configuration
 
 Example:
 
 ```ruby
-Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :mastodon, scope: 'read write follow', credentials: lambda { |domain, callback_url|
-    Rails.logger.info "Requested credentials for #{domain} with callback URL #{callback_url}"
-
-    existing = MastodonClient.find_by(domain: domain)
-    return [existing.client_id, existing.client_secret] unless existing.nil?
-
-    client = Mastodon::REST::Client.new(base_url: "https://#{domain}")
-    app = client.create_app('OmniAuth Test Harness', callback_url)
-
-    MastodonClient.create!(domain: domain, client_id: app.client_id, client_secret: app.client_secret)
-
-    [app.client_id, app.client_secret]
-  }
+MASTODON_OMNIUATH_SETUP = lambda do |env|
+  env["omniauth.strategy"].options[:domain] = Settings::Authentication.mastodon_domain
+  env["omniauth.strategy"].options[:client_id] = Settings::Authentication.mastodon_client
+  env["omniauth.strategy"].options[:client_secret] = Settings::Authentication.mastodon_secret
+  env["omniauth.strategy"].options[:scope] = "read"
 end
 ```
-
-The only configuration key you need to set is a lambda for `:credentials`. That lambda will be called whenever we need to get client credentials for OAuth2 requests. The example above uses an ActiveRecord model to store client credentials for different Mastodon domains, and uses the `mastodon-api` gem to fetch them dynamically if they're not stored yet.
+```ruby
+Devise.setup do |config|
+  config.omniauth :mastodon, setup: MASTODON_OMNIUATH_SETUP
+end
+```
