@@ -1,7 +1,7 @@
 OmniAuth::Mastodon
 ==================
 
-[![Gem Version](http://img.shields.io/gem/v/omniauth-mastodon.svg)][gem]
+[![Gem Version](https://img.shields.io/gem/v/omniauth-mastodon-st.svg)][gem]
 
 [gem]: https://rubygems.org/gems/omniauth-mastodon
 
