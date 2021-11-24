@@ -3,7 +3,7 @@ OmniAuth::Mastodon
 
 [![Gem Version](https://img.shields.io/gem/v/omniauth-mastodon-st.svg)][gem]
 
-[gem]: https://rubygems.org/gems/omniauth-mastodon
+[gem]: https://rubygems.org/gems/omniauth-mastodon-st
 
 Authentication strategy for federated Mastodon instances. This is just slightly more complicated than a traditional OAuth2 flow: We do not know the URL of the OAuth end-points in advance, nor can we be sure that
 we already have client credentials for that Mastodon instance.
